@@ -87,20 +87,28 @@ class App extends Component {
           </form>
           <div className="row">
             <div className="col-12">
+              { this.state.queues.length > 0
+                ? <h4>Queue List:</h4>
+                : ''
+              }
               <ul className="list-group">
                 {
-                  this.state.queues.map( (queue,key) => (
-                    <li key={key} className={"list-group-item " + (key === 0? 'active' : '')}>
-                      <img
-                        src={queue.thumbnailUrl}  alt={queue.ytitle}
-                        className="img-thumbnail"
-                        style={{ display: 'flex' }}
-                      />
-                      <span style={{ display: 'flex', flex: 3, padding: '0 10px'}}>
-                        {key + 1}. {queue.ytitle}
-                      </span>
-                    </li>
-                  ))
+                  this.state.queues.map( (queue,key) => {
+                    if(key !== 0) {
+                      return (
+                        <li key={key} className={"list-group-item " + (key === 0? 'active' : '')}>
+                          <img
+                            src={queue.thumbnailUrl}  alt={queue.ytitle}
+                            className="img-thumbnail"
+                            style={{ display: 'flex' }}
+                          />
+                          <span style={{ display: 'flex', flex: 3, padding: '0 10px'}}>
+                            {queue.ytitle}
+                          </span>
+                        </li>
+                      )
+                    }
+                  })
                 }
               </ul>
             </div>
